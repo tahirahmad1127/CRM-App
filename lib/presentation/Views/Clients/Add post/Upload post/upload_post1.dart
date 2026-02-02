@@ -19,11 +19,25 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
   final TextEditingController jobTitleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  SfRangeValues experienceYears = SfRangeValues(1.0, 5.0);
+  // Experience dropdown value
+  String? selectedExperience;
 
   // Skills
-  List<String> selectedSkills = [];
-  final List<String> availableSkills = ['Management', 'Communication Skill'];
+  List<String> selectedSkills = [
+    'Graphic Designer',
+    'UX Designer',
+    'Video Editor',
+    'Adobe Photoshop'
+  ];
+
+  // Experience options for dropdown
+  final List<String> experienceOptions = [
+    'Entry Level (0-1 years)',
+    'Junior (1-3 years)',
+    'Mid-Level (3-5 years)',
+    'Senior (5-8 years)',
+    'Expert (8+ years)',
+  ];
 
   final List<String> categories = [
     'Technology',
@@ -39,6 +53,77 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
     jobTitleController.dispose();
     descriptionController.dispose();
     super.dispose();
+  }
+
+  void _showAddSkillDialog() {
+    final TextEditingController skillController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Add Skill',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          content: TextField(
+            controller: skillController,
+            decoration: InputDecoration(
+              hintText: 'Enter skill name',
+              hintStyle: GoogleFonts.poppins(
+                fontSize: 14,
+                color: Color(0xff6B6B6B),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Cancel',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff6B6B6B),
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (skillController.text.isNotEmpty) {
+                  setState(() {
+                    selectedSkills.add(skillController.text);
+                  });
+                  Navigator.pop(context);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF80D050),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                'Add',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -64,7 +149,7 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,69 +211,30 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
             Gap(24),
 
             // Skills Section
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Text(
+              'Skills',
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+            Gap(12),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
               children: [
-                Text(
-                  'Skills',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff6B6B6B),
-                  ),
-                ),
-                Gap(8),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Color(0xff959595), width: 0.6),
-                  ),
-                  child: Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: availableSkills.map((skill) {
-                      bool isSelected = selectedSkills.contains(skill);
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (isSelected) {
-                              selectedSkills.remove(skill);
-                            } else {
-                              selectedSkills.add(skill);
-                            }
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            skill,
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff6B6B6B),
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                ...selectedSkills.map((skill) => _buildSkillChip(skill)),
+                _buildSkillChip(
+                  '+ Add Skill',
+                  onTap: _showAddSkillDialog,
                 ),
               ],
             ),
 
             Gap(24),
 
-            // Experience Section
+            // Experience Section - Dropdown
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -201,98 +247,47 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
                   ),
                 ),
                 Gap(8),
-                SfRangeSlider(
-                  min: 0.0,
-                  max: 10.0,
-                  values: experienceYears,
-                  showTicks: false,
-                  showLabels: false,
-                  inactiveColor: const Color(0xFFDEFFCB),
-                  activeColor: const Color(0xFF80D050),
-                  enableTooltip: true,
-                  tooltipShape: SfPaddleTooltipShape(),
-                  onChanged: (SfRangeValues newValues) {
-                    setState(() {
-                      experienceYears = newValues;
-                    });
-                  },
-                ),
-                Gap(8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF80D050),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        '${experienceYears.start.toInt()} year',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF80D050),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        '${experienceYears.end.toInt()} year',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
-            Gap(24),
-
-            // Certificates Section
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Certificates',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff6B6B6B),
-                  ),
-                ),
-                Gap(8),
                 Container(
-                  height: 60,
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Color(0xff959595), width: 0.6),
                   ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          final ImagePicker picker = ImagePicker();
-                          final XFile? image = await picker.pickImage(
-                            source: ImageSource.gallery,
-                          );
-                          if (image != null) {
-                            print('Image selected: ${image.path}');
-                          }
-                        },
-                        icon: Image.asset('assets/images/upload_leads2.png'),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: selectedExperience,
+                      hint: Text(
+                        'Select experience level',
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff6B6B6B),
+                        ),
                       ),
-                    ],
+                      isExpanded: true,
+                      icon: Icon(Icons.keyboard_arrow_down,
+                          color: Color(0xff6B6B6B)),
+                      items: experienceOptions.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff6B6B6B),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedExperience = newValue;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -339,6 +334,28 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
     );
   }
 
+  Widget _buildSkillChip(String skill, {VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(60),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: Color(0xffF5F5F5),
+          borderRadius: BorderRadius.circular(60),
+        ),
+        child: Text(
+          skill,
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Color(0xff6B6B6B),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildStepIndicator(int step, String label) {
     bool isCompleted = currentStep > step;
     bool isCurrent = currentStep == step;
@@ -363,13 +380,13 @@ class _UploadPost1ScreenState extends State<UploadPost1Screen> {
             child: isCompleted
                 ? Icon(Icons.check, color: Colors.white, size: 16)
                 : Text(
-                    '',
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff6B6B6B),
-                    ),
-                  ),
+              '',
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff6B6B6B),
+              ),
+            ),
           ),
         ),
         Gap(4),

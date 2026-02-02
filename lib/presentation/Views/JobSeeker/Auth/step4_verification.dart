@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:crm_app/configurations/frontend_configs.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/code_verification_screen.dart';
 import 'package:crm_app/presentation/elements/common_image_view.dart';
-import 'package:crm_app/presentation/elements/my_button.dart';
 import 'package:crm_app/presentation/elements/my_container_widget.dart';
 import 'package:crm_app/presentation/elements/my_text_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +13,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Step4Verification extends StatefulWidget {
-  const Step4Verification({super.key});
+  final String selectedRole; // Add this parameter
+
+  const Step4Verification({
+    super.key,
+    required this.selectedRole, // Make it required
+  });
 
   @override
   State<Step4Verification> createState() => _Step4VerificationState();
@@ -77,9 +81,12 @@ class _Step4VerificationState extends State<Step4Verification> {
       errorMessage = null;
     });
 
+    // Pass the user role to CodeVerificationScreen
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CodeVerificationScreen()),
+      MaterialPageRoute(
+        builder: (context) => CodeVerificationScreen(selectedRole: widget.selectedRole),
+      ),
     );
   }
 
@@ -89,173 +96,195 @@ class _Step4VerificationState extends State<Step4Verification> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+      backgroundColor: const Color(0xffFFFFFF),
+      body: SafeArea(
+        child: Column(
+          children: [
+            /// ================= HEADER (FULL WIDTH) =================
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 10),
+              child: SizedBox(
+                height: 65,
+                width: double.infinity,
                 child: Stack(
-                  alignment: Alignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
+                    Positioned(
+                      left: 5,
+                      top: 0,
+                      bottom: 0,
                       child: IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon: Icon(CupertinoIcons.arrow_left),
+                        icon: const Icon(CupertinoIcons.arrow_left),
                       ),
                     ),
-                    CommonImageView(
-                      imagePath: 'assets/images/logo2.png',
-                      height: 65,
+                    Center(
+                      child: CommonImageView(
+                        imagePath: 'assets/images/logo2.png',
+                        height: 65,
+                      ),
                     ),
                   ],
                 ),
               ),
-              MyText(
-                text: "Upload ID Card Image",
-                fontWeight: FontWeight.w600,
-                size: 24,
-                color: Color(0xff0F0F0F),
-              ),
-              MyText(
-                text: "Upload front and back side of your id card.",
-                fontWeight: FontWeight.w400,
-                size: 12,
-                color: Color(0xff515151),
-              ),
+            ),
 
-              Gap(screenHeight * 0.06),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: pickImage,
-                    child: Container(
-                      width: screenWidth * 0.40,
-                      height: screenHeight * 0.17,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Color(0xff9A9A9A),
-                          width: 0.4,
-                        ),
-                        image: selectedImage != null
-                            ? DecorationImage(
-                                image: FileImage(selectedImage!),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
+            /// ================= BODY (UNCHANGED) =================
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MyText(
+                        text: "Upload ID Card Image",
+                        fontWeight: FontWeight.w600,
+                        size: 24,
+                        color: const Color(0xff0F0F0F),
                       ),
-                      child: selectedImage == null
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/images/camera2.png",
-                                  width: 35,
-                                ),
-                                MyText(
-                                  text: "Front",
-                                  fontWeight: FontWeight.w700,
-                                  size: 16,
-                                  color: Color(0xff000000),
-                                ),
-                              ],
-                            )
-                          : null,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: pickSecondImage,
-                    child: Container(
-                      width: screenWidth * 0.4,
-                      height: screenHeight * 0.17,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Color(0xff9A9A9A),
-                          width: 0.4,
-                        ),
-                        image: selectedImage2 != null
-                            ? DecorationImage(
-                                image: FileImage(selectedImage2!),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
+                      MyText(
+                        text: "Upload front and back side of your id card.",
+                        fontWeight: FontWeight.w400,
+                        size: 12,
+                        color: const Color(0xff515151),
                       ),
-                      child: selectedImage2 == null
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/images/camera2.png",
-                                  width: 35,
-                                ),
-                                MyText(
-                                  text: "Back",
-                                  fontWeight: FontWeight.w700,
-                                  size: 16,
-                                  color: Color(0xff000000),
-                                ),
-                              ],
-                            )
-                          : null,
-                    ),
-                  ),
-                ],
-              ),
 
-              // Error message display
-              if (errorMessage != null) ...[
-                Gap(16),
-                Center(
-                  child: Text(
-                    errorMessage!,
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.red,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+                      Gap(screenHeight * 0.06),
 
-              Gap(screenHeight * 0.10),
-              MyContainer(
-                onTap: validateAndNavigate,
-                alignment: Alignment.center,
-                margin: EdgeInsets.only(bottom: 30),
-                height: screenHeight * 0.07,
-                width: screenWidth * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: FrontendConfigs.kPrimaryColor,
-                ),
-                child: Center(
-                  child: Text(
-                    "Next",
-                    style: GoogleFonts.poppins(
-                      fontSize: 18,
-                      color: FrontendConfigs.kScaffoldBackgroundColor,
-                      fontWeight: FontWeight.w600,
-                    ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTap: pickImage,
+                            child: Container(
+                              width: screenWidth * 0.40,
+                              height: screenHeight * 0.17,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: const Color(0xff9A9A9A),
+                                  width: 0.4,
+                                ),
+                                image: selectedImage != null
+                                    ? DecorationImage(
+                                  image: FileImage(selectedImage!),
+                                  fit: BoxFit.cover,
+                                )
+                                    : null,
+                              ),
+                              child: selectedImage == null
+                                  ? Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/camera2.png",
+                                    width: 35,
+                                  ),
+                                  MyText(
+                                    text: "Front",
+                                    fontWeight: FontWeight.w700,
+                                    size: 16,
+                                    color: const Color(0xff000000),
+                                  ),
+                                ],
+                              )
+                                  : null,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: pickSecondImage,
+                            child: Container(
+                              width: screenWidth * 0.4,
+                              height: screenHeight * 0.17,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: const Color(0xff9A9A9A),
+                                  width: 0.4,
+                                ),
+                                image: selectedImage2 != null
+                                    ? DecorationImage(
+                                  image: FileImage(selectedImage2!),
+                                  fit: BoxFit.cover,
+                                )
+                                    : null,
+                              ),
+                              child: selectedImage2 == null
+                                  ? Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/camera2.png",
+                                    width: 35,
+                                  ),
+                                  MyText(
+                                    text: "Back",
+                                    fontWeight: FontWeight.w700,
+                                    size: 16,
+                                    color: const Color(0xff000000),
+                                  ),
+                                ],
+                              )
+                                  : null,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      // Error message display
+                      if (errorMessage != null) ...[
+                        Gap(16),
+                        Center(
+                          child: Text(
+                            errorMessage!,
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.red,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+
+                      Gap(screenHeight * 0.10),
+                      MyContainer(
+                        onTap: validateAndNavigate,
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(bottom: 30),
+                        height: screenHeight * 0.07,
+                        width: screenWidth * 0.9,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: FrontendConfigs.kPrimaryColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Next",
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              color: FrontendConfigs.kScaffoldBackgroundColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

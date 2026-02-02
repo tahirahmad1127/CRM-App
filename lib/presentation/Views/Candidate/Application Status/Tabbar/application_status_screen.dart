@@ -1,9 +1,8 @@
 import 'package:crm_app/configurations/frontend_configs.dart';
-import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/Applied/Applied.dart';
-import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/Hired/hired.dart';
-import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/Interview/Interview.dart';
-import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/Offered/offered_screen.dart';
-import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/shortlisted/Shortlisted.dart';
+import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/All_applied_screen/all_applied_screen.dart';
+import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/All_jobs_screen/all_jobs_screen.dart';
+import 'package:crm_app/presentation/Views/Candidate/Application%20Status/Tabbar/Interview/interview_detail.dart';
+import 'package:crm_app/presentation/elements/job_card_template.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -17,30 +16,18 @@ class ApplicationStatusTabs extends StatefulWidget {
 }
 
 class _ApplicationStatusTabsState extends State<ApplicationStatusTabs> {
-  String selectedFilter = 'Applied';
+  String selectedFilter = 'All Jobs';
 
-  final List<String> filters = [
-    'Applied',
-    'Shortlisted',
-    'Interview',
-    'Offered',
-    'Hired'
-  ];
+  final List<String> filters = ['All Jobs', 'Applied Jobs'];
 
   Widget _getSelectedScreen() {
     switch (selectedFilter) {
-      case 'Applied':
-        return  Applied();
-      case 'Shortlisted':
-        return  Shortlisted();
-      case 'Interview':
-        return  InterView();
-      case 'Offered':
-        return  Offered();
-      case 'Hired' :
-        return  Hired();
+      case 'All Jobs':
+        return AllJobsScreen();
+      case 'Applied Jobs':
+        return AppliedJobsScreen();
       default:
-        return  Applied();
+        return AllJobsScreen();
     }
   }
 
@@ -52,7 +39,7 @@ class _ApplicationStatusTabsState extends State<ApplicationStatusTabs> {
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.only(top: 45),
         child: Column(
           children: [
             Padding(
@@ -80,56 +67,54 @@ class _ApplicationStatusTabsState extends State<ApplicationStatusTabs> {
             ),
             Gap(10),
 
-            // 👇 Horizontally Scrollable TabBar
             SizedBox(
               height: screenHeight * 0.05,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                scrollDirection: Axis.horizontal,
-                itemCount: filters.length,
-                separatorBuilder: (context, index) => Gap(8),
-                itemBuilder: (context, index) {
-                  final filter = filters[index];
-                  final isSelected = selectedFilter == filter;
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: List.generate(filters.length, (index) {
+                    final filter = filters[index];
+                    final isSelected = selectedFilter == filter;
 
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedFilter = filter;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? const Color(0xff80D050)
-                            : const Color(0xffF5F5F5),
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: isSelected
-                              ? const Color(0xff80D050)
-                              : Colors.transparent,
-                          width: 1,
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedFilter = filter;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5), // spacing between tabs
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? const Color(0xff80D050)
+                                : const Color(0xffF5F5F5),
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                              color: isSelected
+                                  ? const Color(0xff80D050)
+                                  : Colors.transparent,
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            filter,
+                            style: GoogleFonts.poppins(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              color: isSelected
+                                  ? Colors.white
+                                  : const Color(0xff9A9A9A),
+                            ),
+                          ),
                         ),
                       ),
-                      child: Text(
-                        filter,
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: isSelected
-                              ? Colors.white
-                              : const Color(0xff9A9A9A),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                    );
+                  }),
+                ),
               ),
             ),
-
-            const SizedBox(height: 20),
 
             Expanded(
               child: _getSelectedScreen(),

@@ -1,3 +1,4 @@
+import 'package:crm_app/presentation/Views/Lead/lead_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
@@ -57,19 +58,25 @@ class _UploadPost3ScreenState extends State<UploadPost3Screen> {
                         Expanded(
                           child: Container(
                             height: 10,
-                            color: currentStep > 1 ? Color(0xFF80D050) : Color(0xFFE0E0E0),
+                            color: currentStep > 1
+                                ? Color(0xFF80D050)
+                                : Color(0xFFE0E0E0),
                           ),
                         ),
                         Expanded(
                           child: Container(
                             height: 10,
-                            color: currentStep > 2 ? Color(0xFF80D050) : Color(0xFFE0E0E0),
+                            color: currentStep > 2
+                                ? Color(0xFF80D050)
+                                : Color(0xFFE0E0E0),
                           ),
                         ),
                         Expanded(
                           child: Container(
                             height: 10,
-                            color: currentStep > 3 ? Color(0xFF80D050) : Color(0xFFE0E0E0),
+                            color: currentStep > 3
+                                ? Color(0xFF80D050)
+                                : Color(0xFFE0E0E0),
                           ),
                         ),
                         SizedBox(width: 12.5),
@@ -105,7 +112,10 @@ class _UploadPost3ScreenState extends State<UploadPost3Screen> {
               Gap(8),
               _buildInfoRow('Category:', 'Management'),
               Gap(8),
-              _buildInfoText('Description:', 'Lorem ipsum dolor sit amet, consectetur. At feugiat in ipsum ipsum donec justo.'),
+              _buildInfoText(
+                'Description:',
+                'Lorem ipsum dolor sit amet, consectetur. At feugiat in ipsum ipsum donec justo.',
+              ),
 
               Gap(24),
 
@@ -158,62 +168,134 @@ class _UploadPost3ScreenState extends State<UploadPost3Screen> {
               Gap(8),
               _buildInfoRow('Location:', '11 miles away, GA 30326, Atlanta'),
 
-              Gap(40),
+              Gap(56),
 
-              // Review and Publish Buttons
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 50,
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: Color(0xFF80D050), width: 1.5),
+              GestureDetector(
+                onTap: () {
+                  // Show popup when pressed
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(
-                          child: Text(
-                            'Review',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF80D050),
-                            ),
+                        insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Publish Confirmation',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                'Are you sure you want to publish this item?',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff6B6B6B),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pop(context); // Close popup
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 12,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'Cancel',
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                LeadHomeScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 12,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF80D050),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'Publish',
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  height: 50,
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF80D050),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Publish',
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                  Gap(16),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 50,
-
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF80D050),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Publish',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
 
               Gap(16),
@@ -233,10 +315,14 @@ class _UploadPost3ScreenState extends State<UploadPost3Screen> {
           width: 25,
           height: 25,
           decoration: BoxDecoration(
-            color: (isCompleted || isCurrent) ? Color(0xFF80D050) : Colors.white,
+            color: (isCompleted || isCurrent)
+                ? Color(0xFF80D050)
+                : Colors.white,
             shape: BoxShape.circle,
             border: Border.all(
-              color: (isCompleted || isCurrent) ? Color(0xFF80D050) : Color(0xFFE0E0E0),
+              color: (isCompleted || isCurrent)
+                  ? Color(0xFF80D050)
+                  : Color(0xFFE0E0E0),
               width: 2,
             ),
           ),
@@ -244,22 +330,23 @@ class _UploadPost3ScreenState extends State<UploadPost3Screen> {
             child: isCompleted
                 ? Icon(Icons.check, color: Colors.white, size: 16)
                 : Text(
-              '',
-              style: GoogleFonts.poppins(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: Color(0xff6B6B6B),
-              ),
-            ),
+                    '',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff6B6B6B),
+                    ),
+                  ),
           ),
         ),
+        Gap(4),
         Gap(4),
         Text(
           label,
           style: GoogleFonts.poppins(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: Colors.black
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
           ),
         ),
       ],

@@ -141,8 +141,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 effect: ScaleEffect(
                   activeDotColor: Color(0xff80D050),
                   dotColor: Color(0xffE9E9E9),
-                  dotHeight: 14,
-                  dotWidth: 14,
+                  dotHeight: 12,
+                  dotWidth: 12,
                   scale: 1.25, // Makes active dot ~1px bigger
                   spacing: 5,
                 ),

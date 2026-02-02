@@ -2,6 +2,7 @@ import 'package:crm_app/configurations/frontend_configs.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/login_screen.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/select_role.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/signup_screen.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/bottom_bar_screen.dart';
 import 'package:crm_app/presentation/elements/common_image_view.dart';
 import 'package:crm_app/presentation/elements/my_button.dart';
 import 'package:crm_app/presentation/elements/my_container_widget.dart';
@@ -56,7 +57,7 @@ class RegisterScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignupScreen()),
+                        MaterialPageRoute(builder: (context) => SelectRole()),
                       );
                     },
                     color: Colors.white,
@@ -65,7 +66,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   GestureDetector(
-                    onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> SelectRole()));
+                    onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> BottomBar()));
 
                     },
                     child: MyText(

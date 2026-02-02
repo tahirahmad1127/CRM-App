@@ -1,7 +1,10 @@
 import 'package:crm_app/configurations/frontend_configs.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Apply_now/apply_now.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Saved/job_detail.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/See%20all%20Screens/saved_screen.dart';
 import 'package:crm_app/presentation/elements/job_card_template.dart';
 import 'package:crm_app/presentation/elements/my_container_widget.dart';
+import 'package:crm_app/presentation/elements/my_text_widget.dart';
 import 'package:crm_app/presentation/elements/my_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,26 +33,14 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: Icon(CupertinoIcons.arrow_left),
-                    ),
-                  ),
-                  Text(
-                    "Saved",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: FrontendConfigs.kBlackColor,
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                "Saved",
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: FrontendConfigs.kBlackColor,
+                ),
               ),
             ),
 
@@ -73,6 +64,25 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
             Expanded(
               child: ListView(
                 children: [
+
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SavedSeeAllScreen()),
+                      );
+                    },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: MyText(
+                        text: "See All",
+                        fontWeight: FontWeight.w500,
+                        size: 12,
+                        color: FrontendConfigs.kBlackColor,
+                      ),
+                    ),
+                  ),
+                  Gap(10),
                   JobCard(
                     width: double.infinity,
                     logoPath: "assets/images/id_pic.png",
@@ -84,8 +94,16 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
                     salary: "\$750 - 1k",
                     isSaved: true,
                     onApply: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> JobDetailsScreen()));
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ApplyNowScreen(jobTitle: 'Senior Industrial Manager', companyName: 'BELLE')),
+                      );
+                    },
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => JobDetailsScreen()),
+                      );
                     },
                   ),
                   const SizedBox(height: 20),
@@ -99,7 +117,18 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
                     location: "11 miles away, GA 30326, Atlanta",
                     salary: "\$750 - 1k",
                     isSaved: true,
-                    onApply: () {},
+                    onApply: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ApplyNowScreen(jobTitle: 'Senior Industrial Manager', companyName: 'BELLE')),
+                      );
+                    },
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => JobDetailsScreen()),
+                      );
+                    },
                   ),
                   const SizedBox(height: 20),
                   JobCard(
@@ -113,7 +142,18 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
                     location: "11 miles away, GA 30326, Atlanta",
                     salary: "\$750 - 1k",
                     isSaved: true,
-                    onApply: () {},
+                    onApply: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ApplyNowScreen(jobTitle: 'Senior Industrial Manager', companyName: 'BELLE')),
+                      );
+                    },
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => JobDetailsScreen()),
+                      );
+                    },
                   ),
                 ],
               ),

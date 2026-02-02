@@ -56,6 +56,18 @@ dependencies:
   fl_chart: ^0.69.0
   step_progress_indicator: ^1.0.2
   table_calendar: ^3.0.9
+  file_picker: ^8.1.4
+  url_launcher: ^6.2.2
+  accordion: ^2.6.0
+  animated_accordion: ^1.1.2
+  device_info_plus: ^12.3.0
+  syncfusion_flutter_pdfviewer: ^32.1.25
+
+
+
+
+
+
 
 
 

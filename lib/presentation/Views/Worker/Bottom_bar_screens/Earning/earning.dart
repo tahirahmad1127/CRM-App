@@ -20,12 +20,9 @@ class _EarningState extends State<Earning> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: true,
+
         backgroundColor: Colors.white,
-        actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CalendarScreen()));
-          }, icon: Icon(Icons.calendar_month)),
-        ],
         elevation: 0,
         centerTitle: true,
         title: Text(

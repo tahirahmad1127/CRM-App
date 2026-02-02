@@ -1,4 +1,8 @@
 import 'package:crm_app/configurations/frontend_configs.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Profile/saved_profile.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/notification%20screen/notification%20screen.dart';
+import 'package:crm_app/presentation/Views/Worker/Bottom_bar_screens/Earning/calender/calender.dart';
+import 'package:crm_app/presentation/Views/Worker/Bottom_bar_screens/Earning/shift%20details/shift_details.dart';
 import 'package:crm_app/presentation/Views/Worker/Bottom_bar_screens/Home/clock%20in-out/clock_in.dart';
 import 'package:crm_app/presentation/elements/earning_summary_template.dart';
 import 'package:crm_app/presentation/elements/my_container_widget.dart';
@@ -30,7 +34,21 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/profile_pic.png", width: 60),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SavedProfile(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/images/profile_pic.png', // your image path
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   Gap(10),
                   Expanded(
                     child: Column(
@@ -56,8 +74,30 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                     height: 36,
                     color: Colors.black12,
                     borderRadius: BorderRadius.circular(6),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(6),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CalendarScreen()),
+                        );
+                      },
+                      child: const Center(
+                        child: Icon(Icons.calendar_month),
+                      ),
+                    ),
+                  ),
+
+                  Gap(10),
+                  MyContainer(
+                    width: 40,
+                    height: 36,
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(6),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> NotificationScreen()));
+                      },
                       icon: Image.asset("assets/images/bell.png"),
                     ),
                   ),
@@ -65,6 +105,9 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
               ),
             ),
             ShiftTimingCard(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ShiftDetailScreen()));
+              },
               shiftTime: '9:00 AM - 5:00 PM',
               location: '11 miles away, GA 30326, Atlanta',
               showGpsStatus: true,
@@ -118,12 +161,26 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                 ShiftData(
                   date: 'Thu, Dec 2025',
                   time: '9:00AM - 5:00PM',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShiftDetailScreen(),
+                      ),
+                    );
+                  },
                 ),
                 ShiftData(
                   date: 'Thu, Dec 2025',
                   time: '9:00AM - 5:00PM',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShiftDetailScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

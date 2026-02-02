@@ -27,15 +27,15 @@ class _InterviewDetailsState extends State<InterviewDetails> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.only(top: 37, bottom: 20),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: Icon(CupertinoIcons.arrow_left),
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(CupertinoIcons.arrow_left),
                     ),
                   ),
                   Text(
@@ -55,7 +55,7 @@ class _InterviewDetailsState extends State<InterviewDetails> {
               time: '10:30 AM',
               location: '11 miles away, GA 30326, Atlanta',
               recruiterNote:
-                  'Please Be Prepared to Discuss your Experience working with large team',
+              'Please Be Prepared to Discuss your Experience working with large team',
               onAccept: () {},
               onDecline: () {},
               onReschedule: () {},

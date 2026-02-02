@@ -38,11 +38,6 @@ class _ShiftDetailScreenState extends State<ShiftDetailScreen> {
               AppBar(
                 backgroundColor: Colors.white,
                 elevation: 0,
-                actions: [
-                  IconButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => DisputeCenterScreen()));
-                  }, icon: Icon(Icons.arrow_forward))
-                ],
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {

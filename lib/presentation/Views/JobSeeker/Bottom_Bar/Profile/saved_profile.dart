@@ -1,21 +1,39 @@
+import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Profile/Setting/setting.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Profile/edit_profile/edit_profile.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
 class SavedProfile extends StatelessWidget {
-  const SavedProfile({super.key});
+  final bool fromBottomBar;
+  const SavedProfile({super.key,
+    this.fromBottomBar = false, // default = show leading
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        automaticallyImplyLeading: !fromBottomBar,
         backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsScreen()),
+              );
+            },
+            icon: Icon(CupertinoIcons.gear, color: Colors.black, size: 20),
+          ),
+        ],
         elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-        ),
         title: Text(
           'Profile',
           style: GoogleFonts.poppins(
@@ -37,7 +55,9 @@ class SavedProfile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 52,
-                    backgroundImage: AssetImage('assets/images/profile_pic.png'),
+                    backgroundImage: AssetImage(
+                      'assets/images/profile_pic.png',
+                    ),
                   ),
                   Gap(12),
                   Text(
@@ -50,10 +70,15 @@ class SavedProfile extends StatelessWidget {
                   ),
                   Gap(12),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff80D050),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
@@ -84,9 +109,12 @@ class SavedProfile extends StatelessWidget {
             Gap(14),
             _buildInfoRow(Icons.phone_outlined, '+23 22201123'),
             Gap(10),
-            _buildInfoRow("assets/images/email2.png",'Example232@gmail.com'),
+            _buildInfoRow("assets/images/email2.png", 'Example232@gmail.com'),
             Gap(10),
-            _buildInfoRow(Icons.location_on_outlined, '2484 Royal Ln. Mesa, New Jersey 45463'),
+            _buildInfoRow(
+              Icons.location_on_outlined,
+              '2484 Royal Ln. Mesa, New Jersey 45463',
+            ),
             Gap(10),
             _buildInfoRow("assets/images/calender.png", 'January 1, 1990'),
             Gap(20),
@@ -109,8 +137,9 @@ class SavedProfile extends StatelessWidget {
                 _buildSkillChip('UX Designer'),
                 _buildSkillChip('Video Editor'),
                 _buildSkillChip('Adobe Photoshop'),
-                _buildSkillChip('+ Add Skill'),
-
+                _buildSkillChip('+ Add Skill',
+                onTap: (){}
+                ),
               ],
             ),
             Gap(20),
@@ -127,11 +156,34 @@ class SavedProfile extends StatelessWidget {
             Gap(12),
             _buildDocumentItem('assets/images/document_icon.png', 'Resume.pdf'),
             Gap(8),
-            _buildDocumentItem('assets/images/document_icon.png', 'Experience Letter.pdf'),
+            _buildDocumentItem(
+              'assets/images/document_icon.png',
+              'Experience Letter.pdf',
+            ),
             Gap(8),
-            _buildDocumentItem('assets/images/document_icon.png', 'Portfolio.docx'),
+            _buildDocumentItem(
+              'assets/images/document_icon.png',
+              'Portfolio.docx',
+            ),
             Gap(12),
-            _buildSkillChip('+ Upload Document'),
+            _buildSkillChip(
+              '+ Upload Document',
+              onTap: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.any, // you can change this
+                );
+
+                if (result != null) {
+                  PlatformFile file = result.files.first;
+
+                  print("File Name: ${file.name}");
+                  print("File Path: ${file.path}");
+                  print("File Size: ${file.size}");
+                } else {
+                  print("User cancelled the picker");
+                }
+              },
+            ),
 
             Gap(30),
 
@@ -150,8 +202,6 @@ class SavedProfile extends StatelessWidget {
                 _buildSkillChip('Full Time'),
                 Gap(15),
                 _buildSkillChip('Remote'),
-
-
               ],
             ),
           ],
@@ -167,11 +217,11 @@ class SavedProfile extends StatelessWidget {
         icon is IconData
             ? Icon(icon, size: 18, color: Color(0xff7E7E7E))
             : Image.asset(
-          icon as String,
-          width: 18,
-          height: 18,
-          color: Color(0xff7E7E7E),
-        ),
+                icon as String,
+                width: 18,
+                height: 18,
+                color: Color(0xff7E7E7E),
+              ),
         Gap(12),
         Expanded(
           child: Text(
@@ -216,11 +266,11 @@ class SavedProfile extends StatelessWidget {
         icon is IconData
             ? Icon(icon, size: 18, color: Color(0xff7E7E7E))
             : Image.asset(
-          icon as String,
-          width: 18,
-          height: 18,
-          color: Color(0xff7E7E7E),
-        ),
+                icon as String,
+                width: 18,
+                height: 18,
+                color: Color(0xff7E7E7E),
+              ),
         Gap(12),
         Text(
           name,
@@ -233,5 +283,4 @@ class SavedProfile extends StatelessWidget {
       ],
     );
   }
-
 }

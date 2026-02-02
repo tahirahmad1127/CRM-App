@@ -24,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
     JobScreen(),
     SavedJobsScreen(),
     ChatScreen(),
-    SavedProfile(),
+    SavedProfile(fromBottomBar: true),
   ];
 
   @override

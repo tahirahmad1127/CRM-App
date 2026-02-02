@@ -32,27 +32,13 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 20),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      icon: Icon(CupertinoIcons.arrow_left),
-                    ),
-                  ),
-                  Text(
-                    "Chat",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: FrontendConfigs.kBlackColor,
-                    ),
-                  ),
-                ],
+              child: Text(
+                "Chat",
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: FrontendConfigs.kBlackColor,
+                ),
               ),
             ),
             Padding(

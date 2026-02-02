@@ -12,6 +12,7 @@ class Timesheet extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        automaticallyImplyLeading: true,
         title: Text(
           'Timesheet',
           style: GoogleFonts.poppins(

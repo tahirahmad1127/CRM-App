@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:crm_app/presentation/Views/JobSeeker/onboarding_screen/onboarding_screen.dart';
+import 'package:crm_app/presentation/Views/Navigation%20Screen.dart';
 import 'package:crm_app/presentation/elements/common_image_view.dart';
 import 'package:crm_app/presentation/elements/my_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const OnboardingScreen(), // 🔹 Replace with your screen
+          builder: (context) => const OnboardingScreen(),
         ),
       );
     });

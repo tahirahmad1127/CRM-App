@@ -1,4 +1,5 @@
 import 'package:crm_app/configurations/frontend_configs.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Auth/select_role.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/signup_screen.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Home/home_screen.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/bottom_bar_screen.dart';
@@ -40,28 +41,33 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Fixed top: back button + logo
+        Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 10),
+        child: Row(
+          children: [
             Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10, left: 20, right: 20),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(CupertinoIcons.arrow_left),
-                    ),
-                  ),
-                  CommonImageView(
-                    imagePath: 'assets/images/logo2.png',
-                    height: 65,
-                  ),
-                ],
+              padding: const EdgeInsets.only(left: 5),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(CupertinoIcons.arrow_left),
               ),
             ),
+
+            Expanded(
+              child: Center(
+                child: CommonImageView(
+                  imagePath: 'assets/images/logo2.png',
+                  height: 65,
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 48), // balance space equal to IconButton width
+          ],
+        ),
+      ),
 
             // Scrollable content
             Expanded(
@@ -308,7 +314,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SignupScreen(),
+                              builder: (context) => SelectRole(),
                             ),
                           );
                         },

@@ -104,7 +104,7 @@ class HiredCard extends StatelessWidget {
             Gap(16),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     startDate,

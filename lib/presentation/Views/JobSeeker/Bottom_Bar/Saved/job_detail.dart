@@ -1,4 +1,5 @@
 import 'package:crm_app/configurations/frontend_configs.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Apply_now/apply_now.dart';
 import 'package:crm_app/presentation/elements/job_card_template.dart';
 import 'package:crm_app/presentation/elements/job_details_template.dart';
 import 'package:crm_app/presentation/elements/my_button.dart';
@@ -205,14 +206,18 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                       children: [
                         MyButton(
                           btnLabel: "Apply Now",
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> ApplyNowScreen(jobTitle: 'Senior Industrial Manager', companyName: 'BELLE')));
+
+                          },
                           width: screenWidth * 0.433,
                         ),
                         SizedBox(width: screenHeight * 0.01),
                         MyButton(
                           btnLabel: "Add to saved",
                           width: screenWidth * 0.433,
-                          onPressed: () {},
+                          onPressed: () {
+                          },
                           color: Colors.white,
                           textColor: FrontendConfigs.kPrimaryColor,
                           border: Border.all(

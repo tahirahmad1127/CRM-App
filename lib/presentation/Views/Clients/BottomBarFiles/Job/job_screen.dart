@@ -1,3 +1,4 @@
+import 'package:crm_app/presentation/Views/Clients/Add%20post/Upload%20post/upload_post.dart';
 import 'package:crm_app/presentation/Views/Clients/BottomBarFiles/Job/Custom%20Tabbar/custom_tabbar.dart';
 import 'package:crm_app/presentation/Views/Clients/BottomBarFiles/Job/Interview_detail_popup.dart';
 import 'package:crm_app/presentation/Views/Clients/TimeSheet/client_timesheet.dart';
@@ -32,101 +33,100 @@ class _ClientJobScreenState extends State<ClientJobScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ClientTimeSheetScreen()));
-          }, icon: Icon(Icons.arrow_forward))
-        ],
         title: Text(
-        'Jobs',
-        style: GoogleFonts.poppins(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
+          'Jobs',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
         ),
       ),
-    ),
-    body: Padding(
-    padding: EdgeInsets.all(16),
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    // Filter Tabs
-    CustomTabBar(
-    tabs: filters,
-    selectedTab: selectedFilter,
-    onTabSelected: (tab) {
-    setState(() {
-    selectedFilter = tab;
-    });
-    },
-    ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> UploadPostScreen()));
 
-    Gap(16),
+        },
+        backgroundColor: Color(0xFF80D050),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Filter Tabs
+            CustomTabBar(
+              tabs: filters,
+              selectedTab: selectedFilter,
+              onTabSelected: (tab) {
+                setState(() {
+                  selectedFilter = tab;
+                });
+              },
+            ),
 
-    // Content based on selected tab
-    Expanded(
-    child:
-    selectedFilter == 'Applied' || selectedFilter == 'Shortlisted'
-    ? ListView.builder(
-    itemCount: 2,
-    itemBuilder: (context, index) {
-    return ClientJobCard(
-    imageUrl: 'assets/images/id_pic4.png',
-    name: 'Mirtain moll',
-    experience: '+3 Years',
-    onNextStage: () {
-    showDialog(
-    context: context,
-    builder: (context) => InterviewDetailPopup(
-    candidateName: 'Mirtain moll',
-    experience: '+3 Years',
-    ),
-    );
-    },
-    onReject: () {},
-    );
-    },
+            Gap(16),
 
-    )
-        : selectedFilter == 'Interview'
-    ? ListView.builder(
-    itemCount: 3,
-    itemBuilder: (context, index) {
-    return ClientJobCard2(
-    imageUrl: 'assets/images/id_pic4.png',
-    name: 'Mirtain moll',
-    experience: '+3 Years',
-    interviewDate: 'Interview in 2 days',
-    onHire: () {
-    },
-    onReject: () {
-    },
-    );
-    },
-    )
-        : selectedFilter == 'Offered'
-    ? ListView.builder(
-    itemCount: 4,
-    itemBuilder: (context, index) {
-    return ClientJobCard3(
-    imageUrl: 'assets/images/id_pic4.png',
-    name: 'Mirtain moll',
-    experience: '+3 Years',
-    onConfirmed: () {
-    },
-    );
-    },
-    )
-
-        : SizedBox(), // Empty for Interview and Offered tabs
-    ),
-    ],
-    )
-    ,
-    )
-    ,
+            // Content based on selected tab
+            Expanded(
+              child:
+              selectedFilter == 'Applied' || selectedFilter == 'Shortlisted'
+                  ? ListView.builder(
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return ClientJobCard(
+                    imageUrl: 'assets/images/id_pic4.png',
+                    name: 'Mirtain moll',
+                    experience: '+3 Years',
+                    onNextStage: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => InterviewDetailPopup(
+                          candidateName: 'Mirtain moll',
+                          experience: '+3 Years',
+                        ),
+                      );
+                    },
+                    onReject: () {},
+                  );
+                },
+              )
+                  : selectedFilter == 'Interview'
+                  ? ListView.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return ClientJobCard2(
+                    imageUrl: 'assets/images/id_pic4.png',
+                    name: 'Mirtain moll',
+                    experience: '+3 Years',
+                    interviewDate: 'Interview in 2 days',
+                    onHire: () {},
+                    onReject: () {},
+                  );
+                },
+              )
+                  : selectedFilter == 'Offered'
+                  ? ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return ClientJobCard3(
+                    imageUrl: 'assets/images/id_pic4.png',
+                    name: 'Mirtain moll',
+                    experience: '+3 Years',
+                    onConfirmed: () {},
+                  );
+                },
+              )
+                  : SizedBox(), // Empty for Interview and Offered tabs
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

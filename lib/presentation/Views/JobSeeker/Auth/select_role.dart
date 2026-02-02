@@ -1,5 +1,6 @@
 import 'package:crm_app/configurations/frontend_configs.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/login_screen.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Auth/signup_screen.dart';
 import 'package:crm_app/presentation/elements/common_image_view.dart';
 import 'package:crm_app/presentation/elements/my_button.dart';
 import 'package:crm_app/presentation/elements/my_container_widget.dart';
@@ -52,7 +53,7 @@ class _SelectRoleState extends State<SelectRole> {
               ),
               MyText(
                 text:
-                    "Select your role below so we can\npersonalize your experience.",
+                "Select your role below so we can\npersonalize your experience.",
                 fontWeight: FontWeight.w400,
                 size: 12,
                 color: Color(0xff515151),
@@ -64,7 +65,7 @@ class _SelectRoleState extends State<SelectRole> {
               buildSelectionWidget(
                 screenWidth: screenWidth,
                 iconPath: "assets/images/job_icon.png",
-                label: "Job Seeker",
+                label: "Job Seeker/Looking for Work",
                 isSelected: selectedRole == "Job Seeker",
                 onTap: () {
                   setState(() {
@@ -79,72 +80,18 @@ class _SelectRoleState extends State<SelectRole> {
 
               ),
 
-              buildSelectionWidget(
-                screenWidth: screenWidth,
-                iconPath: "assets/images/second_icon.png",
-                label: "Candidate",
-                isSelected: selectedRole == "Candidate",
-                onTap: () {
-                  setState(() {
-                    if (selectedRole == "Candidate") {
-                      selectedRole = null;   // Deselect
-                    } else {
-                      selectedRole = "Candidate"; // Select
-                    }
-                    errorMessage = null;
-                  });
-                },
-
-              ),
 
               buildSelectionWidget(
                 screenWidth: screenWidth,
                 iconPath: "assets/images/third_icon.png",
-                label: "Worker",
-                isSelected: selectedRole == "Worker",
+                label: "Employer/Looking for Workers",
+                isSelected: selectedRole == "Employer",
                 onTap: () {
                   setState(() {
-                    if (selectedRole == "Worker") {
+                    if (selectedRole == "Employer") {
                       selectedRole = null;   // Deselect
                     } else {
-                      selectedRole = "Worker"; // Select
-                    }
-                    errorMessage = null;
-                  });
-                },
-
-              ),
-
-              buildSelectionWidget(
-                screenWidth: screenWidth,
-                iconPath: "assets/images/fourth_icon.png",
-                label: "Lead",
-                isSelected: selectedRole == "Lead",
-                onTap: () {
-                  setState(() {
-                    if (selectedRole == "Lead") {
-                      selectedRole = null;   // Deselect
-                    } else {
-                      selectedRole = "Lead"; // Select
-                    }
-                    errorMessage = null;
-                  });
-                },
-
-
-              ),
-
-              buildSelectionWidget(
-                screenWidth: screenWidth,
-                iconPath: "assets/images/fifth_icon.png",
-                label: "Client",
-                isSelected: selectedRole == "Client",
-                onTap: () {
-                  setState(() {
-                    if (selectedRole == "Client") {
-                      selectedRole = null;   // Deselect
-                    } else {
-                      selectedRole = "Client"; // Select
+                      selectedRole = "Employer"; // Select
                     }
                     errorMessage = null;
                   });
@@ -164,8 +111,7 @@ class _SelectRoleState extends State<SelectRole> {
                     ),
                   ),
                 ),
-
-              Gap(screenHeight * 0.05),
+              Spacer(),
               MyContainer(
                 onTap: () {
                   if (selectedRole == null) {
@@ -177,15 +123,15 @@ class _SelectRoleState extends State<SelectRole> {
                       errorMessage = null;
                     });
 
+                    // Pass selectedRole to SignupScreen
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                        builder: (context) => SignupScreen(selectedRole: selectedRole!),
                       ),
                     );
                   }
                 },
-
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(bottom: 30),
                 height: screenHeight * 0.07,
@@ -244,10 +190,10 @@ class _SelectRoleState extends State<SelectRole> {
         border: Border.all(
           color: isSelected
               ? FrontendConfigs.kPrimaryColor   // ✅ selected border
-              : Color(0xff515151),              // normal border
-          width: 0.8,
+              : Color(0xff6B6B6B),              // normal border
+          width: 0.6,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
         color: FrontendConfigs.kWhiteColor,
       ),
       child: Row(
@@ -264,7 +210,7 @@ class _SelectRoleState extends State<SelectRole> {
             child: Text(
               label,
               style: GoogleFonts.poppins(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: isSelected
                     ? FrontendConfigs.kPrimaryColor

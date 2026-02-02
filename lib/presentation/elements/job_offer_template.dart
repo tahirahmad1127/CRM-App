@@ -35,7 +35,7 @@ class JobOfferCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),

@@ -1,4 +1,11 @@
+import 'package:crm_app/presentation/Views/Clients/Add%20post/Upload%20post/upload_post.dart';
+import 'package:crm_app/presentation/Views/Clients/BottomBarFiles/Job/job_screen.dart';
+import 'package:crm_app/presentation/Views/Clients/TimeSheet/client_timesheet.dart';
+import 'package:crm_app/presentation/Views/Clients/Workers/client_workers_screen.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Profile/saved_profile.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/notification%20screen/notification%20screen.dart';
 import 'package:crm_app/presentation/Views/Lead/business_profile.dart';
+import 'package:crm_app/presentation/elements/job_card_template.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
@@ -21,7 +28,18 @@ class LeadHomeScreen extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/profile_pic.png", width: 60),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SavedProfile()),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/profile_pic.png",
+                      width: 60,
+                    ),
+                  ),
                   Gap(10),
                   Expanded(
                     child: Column(
@@ -54,10 +72,15 @@ class LeadHomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: IconButton(
-                      onPressed: () {},
-                      icon: Image.asset("assets/images/bell.png",
-                        width: 20,
-                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NotificationScreen(),
+                          ),
+                        );
+                      },
+                      icon: Image.asset("assets/images/bell.png", width: 20),
                       padding: EdgeInsets.zero,
                     ),
                   ),
@@ -113,10 +136,18 @@ class LeadHomeScreen extends StatelessWidget {
                       Gap(12),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessProfile()));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BusinessProfile(),
+                            ),
+                          );
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
                           decoration: BoxDecoration(
                             color: Color(0xFF80D050),
                             borderRadius: BorderRadius.circular(6),
@@ -133,11 +164,12 @@ class LeadHomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Image.asset('assets/images/lead_welcome.png',
+                  Image.asset(
+                    'assets/images/lead_welcome.png',
                     height: 85,
                     width: 125,
                     fit: BoxFit.fill,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -145,7 +177,6 @@ class LeadHomeScreen extends StatelessWidget {
             Gap(16),
 
             // Post a Job Container
-// Post a Job Container
             Stack(
               children: [
                 // Main Container with background color
@@ -217,9 +248,19 @@ class LeadHomeScreen extends StatelessWidget {
                       ),
                       Gap(7),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UploadPostScreen(),
+                            ),
+                          );
+                        },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 10,
+                          ),
                           decoration: BoxDecoration(
                             color: Color(0xFF80D050),
                             borderRadius: BorderRadius.circular(6),
@@ -239,151 +280,77 @@ class LeadHomeScreen extends StatelessWidget {
                 ),
                 // Speaker image positioned manually
                 Positioned(
-                  bottom: 15,  // Adjust this value
-                  right:0,   // Adjust this value
-                  child: Image.asset(
-                    'assets/images/speaker.png',
-                    width: 120,
-                  ),
+                  bottom: 15,
+                  right: 0,
+                  child: Image.asset('assets/images/speaker.png', width: 120),
                 ),
               ],
             ),
 
             Gap(24),
 
-            // Explore Features
-
-
-
-
-            // Features Grid Container with Shadow
-            Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0x14000000),
-                    blurRadius: 20,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Explore Features',
-                    style: GoogleFonts.poppins(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Gap(20),
-                  // First Row
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildFeatureItem('Post Job', 'assets/images/post_job.png'),
-                      _buildFeatureItem('Manage Workers', 'assets/images/manage_workers.png'),
-                      _buildFeatureItem('Track Hours', 'assets/images/track_hours.png'),
-                    ],
-                  ),
-                  Gap(24),
-                  // Second Row
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildFeatureItem('Payments', 'assets/images/payments.png'),
-                      _buildFeatureItem('Settings', 'assets/images/settings.png'),
-                      SizedBox(width: 70), // Empty space for alignment
-                    ],
-                  ),
-                ],
+            // Recent Jobs Heading
+            Text(
+              'Recent Jobs',
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
               ),
             ),
 
-            Gap(24),
+            Gap(20),
 
-            // Upgrade to Client Button
-            GestureDetector(
+            // Job Cards Section 1
+            JobCard(
+              width: double.infinity,
+              logoPath: "assets/images/id_pic.png",
+              companyName: "BELLE",
+              timeAgo: "2hr Ago",
+              jobTitle: "Senior Industrial Manager",
+              tags: ["Full-Time", "In Office"],
+              location: "11 miles away, GA 30326, Atlanta",
+              salary: "\$750 - 1k",
+              isSaved: true,
+              onApply: () {},
               onTap: () {},
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  color: Color(0xFF80D050),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: Text(
-                    'Upgrade to Client',
-                    style: GoogleFonts.poppins(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+            ),
+
+            Gap(16),
+
+            JobCard(
+              width: double.infinity,
+              logoPath: "assets/images/id_pic.png",
+              companyName: "TECH CORP",
+              timeAgo: "5hr Ago",
+              jobTitle: "Software Engineer",
+              tags: ["Full-Time", "Remote"],
+              location: "Remote, United States",
+              salary: "\$1.5k - 2k",
+              isSaved: false,
+              onApply: () {},
+              onTap: () {},
+            ),
+
+            Gap(16),
+
+            JobCard(
+              width: double.infinity,
+              logoPath: "assets/images/id_pic.png",
+              companyName: "DESIGN STUDIO",
+              timeAgo: "1 day Ago",
+              jobTitle: "UX/UI Designer",
+              tags: ["Part-Time", "Hybrid"],
+              location: "5 miles away, NY 10001, New York",
+              salary: "\$800 - 1.2k",
+              isSaved: true,
+              onApply: () {},
+              onTap: () {},
             ),
 
             Gap(24),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureItem(String title, String assetPath) {
-    return GestureDetector(
-      onTap: () {},
-      child: Column(
-        children: [
-          Container(
-            width: 90,
-            height: 90,
-            decoration: BoxDecoration(
-              color: Color(0xffF8F8F8),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        assetPath,
-                        width: 40,
-                      ),
-                      padding: EdgeInsets.zero,
-                    ),
-                    SizedBox(
-                      width: 70,
-                      child: Text(
-                        title,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-        ],
       ),
     );
   }
