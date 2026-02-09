@@ -2,7 +2,9 @@ import 'package:crm_app/presentation/Views/Clients/Add%20post/Upload%20post/uplo
 import 'package:crm_app/presentation/Views/Clients/BottomBarFiles/Job/job_screen.dart';
 import 'package:crm_app/presentation/Views/Clients/TimeSheet/client_timesheet.dart';
 import 'package:crm_app/presentation/Views/Clients/Workers/client_workers_screen.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Apply_now/apply_now.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Profile/saved_profile.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Saved/job_detail.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/notification%20screen/notification%20screen.dart';
 import 'package:crm_app/presentation/Views/Lead/business_profile.dart';
 import 'package:crm_app/presentation/elements/job_card_template.dart';
@@ -312,8 +314,23 @@ class LeadHomeScreen extends StatelessWidget {
               location: "11 miles away, GA 30326, Atlanta",
               salary: "\$750 - 1k",
               isSaved: true,
-              onApply: () {},
-              onTap: () {},
+              onApply: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ApplyNowScreen(
+                      jobTitle: 'Senior Industrial Manager',
+                      companyName: 'BELLE',
+                    ),
+                  ),
+                );
+              },
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => JobDetailsScreen()),
+                );
+              },
             ),
 
             Gap(16),
@@ -328,8 +345,23 @@ class LeadHomeScreen extends StatelessWidget {
               location: "Remote, United States",
               salary: "\$1.5k - 2k",
               isSaved: false,
-              onApply: () {},
-              onTap: () {},
+              onApply: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ApplyNowScreen(
+                      jobTitle: 'Software Engineer',
+                      companyName: 'TECH CORP',
+                    ),
+                  ),
+                );
+              },
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => JobDetailsScreen()),
+                );
+              },
             ),
 
             Gap(16),
@@ -344,8 +376,23 @@ class LeadHomeScreen extends StatelessWidget {
               location: "5 miles away, NY 10001, New York",
               salary: "\$800 - 1.2k",
               isSaved: true,
-              onApply: () {},
-              onTap: () {},
+              onApply: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ApplyNowScreen(
+                      jobTitle: 'UX/UI Designer',
+                      companyName: 'DESIGN STUDIO',
+                    ),
+                  ),
+                );
+              },
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => JobDetailsScreen()),
+                );
+              },
             ),
 
             Gap(24),

@@ -24,10 +24,7 @@ class _ClientWorkersScreenState extends State<ClientWorkersScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
         title: Text(
           "Workers",
           style: GoogleFonts.poppins(
@@ -46,7 +43,7 @@ class _ClientWorkersScreenState extends State<ClientWorkersScreen> {
             // Workers List using ClientJobCard
             ClientJobCard(
               name: "John Doe",
-              email: "johndoe@example.com",
+              domain: "Dev Ops Engineer",
               imageUrl: "assets/images/id_pic4.png", // optional
               onTap: () {
                 Navigator.push(
@@ -59,7 +56,7 @@ class _ClientWorkersScreenState extends State<ClientWorkersScreen> {
             ),
             ClientJobCard(
               name: "Jane Smith",
-              email: "janesmith@example.com",
+              domain: "AI Engineer",
               imageUrl: "assets/images/id_pic4.png", // optional
               onTap: () {
                 Navigator.push(
@@ -72,7 +69,7 @@ class _ClientWorkersScreenState extends State<ClientWorkersScreen> {
             ),
             ClientJobCard(
               name: "Mike Johnson",
-              email: "mikejohnson@example.com",
+              domain: "App Developer",
               imageUrl: "assets/images/id_pic4.png", // optional
               onTap: () {
                 Navigator.push(
@@ -508,14 +505,14 @@ class _ClientWorkersScreenState extends State<ClientWorkersScreen> {
 
 class ClientJobCard extends StatelessWidget {
   final String name;
-  final String email;
+  final String domain;
   final String? imageUrl;
   final VoidCallback? onTap;
 
   const ClientJobCard({
     super.key,
     required this.name,
-    required this.email,
+    required this.domain,
     this.imageUrl,
     this.onTap,
   });
@@ -548,7 +545,7 @@ class ClientJobCard extends StatelessWidget {
             ),
             Gap(12),
 
-            // Name and Email
+            // Name and Domain
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -563,7 +560,7 @@ class ClientJobCard extends StatelessWidget {
                   ),
                   Gap(2),
                   Text(
-                    email,
+                    domain,
                     style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,

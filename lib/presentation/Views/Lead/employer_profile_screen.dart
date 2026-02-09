@@ -8,22 +8,12 @@ import 'package:gap/gap.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SavedProfile extends StatelessWidget {
+class EmployerProfileScreen extends StatelessWidget {
   final bool fromBottomBar;
-  const SavedProfile({
+  const EmployerProfileScreen({
     super.key,
     this.fromBottomBar = false, // default = show leading
   });
-
-  // Function to open PDF viewer
-  void _openPdfViewer(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PdfViewerPage(),
-      ),
-    );
-  }
 
   // Function to open URL in browser
   Future<void> _launchUrl(String url) async {
@@ -39,7 +29,7 @@ class SavedProfile extends StatelessWidget {
       backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        automaticallyImplyLeading: !fromBottomBar,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         actions: [
           IconButton(
@@ -48,7 +38,19 @@ class SavedProfile extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
+                MaterialPageRoute(builder: (context) => SettingsScreen(
+                  showPrivacyPolicy: true,
+                  showTerms: true,
+                  showContactUs: true,
+                  showFaqs: true,
+                  showNotifications: true,
+                  showLogout: true,
+
+                  showTimesheet: false,
+                  showEarning: false,
+                  showDocumentation: false,
+                  showPortfolio: false,
+                )),
               );
             },
             icon: Icon(CupertinoIcons.gear, color: Colors.black, size: 20),
@@ -56,7 +58,7 @@ class SavedProfile extends StatelessWidget {
         ],
         elevation: 0,
         title: Text(
-          'Profile',
+          'Company Profile',
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -70,7 +72,7 @@ class SavedProfile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile Image and Edit Button
+            // Profile Image and Company Name
             Center(
               child: Column(
                 children: [
@@ -82,40 +84,11 @@ class SavedProfile extends StatelessWidget {
                   ),
                   Gap(12),
                   Text(
-                    'Morgan Mill',
+                    'Tech Solutions Inc.',
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
-                    ),
-                  ),
-                  Gap(12),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditProfile(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff80D050),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    child: Text(
-                      'Edit Profile',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xffFFFFFF),
-                      ),
                     ),
                   ),
                   Gap(12),
@@ -134,21 +107,19 @@ class SavedProfile extends StatelessWidget {
               ),
             ),
             Gap(14),
-            _buildInfoRow(Icons.phone_outlined, '+23 22201123'),
+            _buildInfoRow(Icons.phone_outlined, '+1 (555) 123-4567'),
             Gap(10),
-            _buildInfoRow("assets/images/email2.png", 'Example232@gmail.com'),
+            _buildInfoRow("assets/images/email2.png", 'contact@techsolutions.com'),
             Gap(10),
             _buildInfoRow(
               Icons.location_on_outlined,
-              '2484 Royal Ln. Mesa, New Jersey 45463',
+              '1234 Business Ave, Silicon Valley, CA 94025',
             ),
-            Gap(10),
-            _buildInfoRow("assets/images/calender.png", 'January 1, 1990'),
             Gap(20),
 
-            // Social Accounts Section
+            // Alternate Contact Person Section
             Text(
-              'Social Accounts',
+              'Alternate Contact Person',
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -156,48 +127,11 @@ class SavedProfile extends StatelessWidget {
               ),
             ),
             Gap(14),
-            InkWell(
-              onTap: () {
-                _launchUrl('https://www.linkedin.com/in/morgan-mill');
-              },
-              child: _buildInfoRow(
-                "assets/images/linkedin_icon.png",
-                'linkedin.com/in/morgan-mill',
-              ),
-            ),
+            _buildInfoRow(Icons.person_outline, 'Sarah Johnson'),
             Gap(10),
-            InkWell(
-              onTap: () {
-                _launchUrl('https://github.com/morganmill');
-              },
-              child: _buildInfoRow(
-                "assets/images/github_icon.png",
-                'github.com/morganmill',
-              ),
-            ),
-            Gap(20),
-
-            // Skills Section
-            Text(
-              'Skills',
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-            Gap(12),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                _buildSkillChip('Graphic Designer'),
-                _buildSkillChip('UX Designer'),
-                _buildSkillChip('Video Editor'),
-                _buildSkillChip('Adobe Photoshop'),
-                _buildSkillChip('+ Add Skill', onTap: () {}),
-              ],
-            ),
+            _buildInfoRow(Icons.phone_outlined, '+1 (555) 987-6543'),
+            Gap(10),
+            _buildInfoRow("assets/images/email2.png", 'sarah.johnson@techsolutions.com'),
             Gap(20),
 
             // Documents Section
@@ -210,23 +144,23 @@ class SavedProfile extends StatelessWidget {
               ),
             ),
             Gap(12),
-            _buildDocumentItem('assets/images/document_icon.png', 'Resume.pdf'),
+            _buildDocumentItem('assets/images/document_icon.png', 'Company Registration.pdf'),
             Gap(8),
             _buildDocumentItem(
               'assets/images/document_icon.png',
-              'Experience Letter.pdf',
+              'Business License.pdf',
             ),
             Gap(8),
             _buildDocumentItem(
               'assets/images/document_icon.png',
-              'Portfolio.docx',
+              'Tax Certificate.pdf',
             ),
             Gap(12),
             _buildSkillChip(
               '+ Upload Document',
               onTap: () async {
                 FilePickerResult? result = await FilePicker.platform.pickFiles(
-                  type: FileType.any, // you can change this
+                  type: FileType.any,
                 );
 
                 if (result != null) {
@@ -236,57 +170,12 @@ class SavedProfile extends StatelessWidget {
                   print("File Path: ${file.path}");
                   print("File Size: ${file.size}");
                 } else {
+                  // User canceled the picker
                 }
               },
             ),
 
             Gap(30),
-
-            // Preferences Section
-            Text(
-              'Preferences',
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-            Gap(12),
-            Row(
-              children: [
-                _buildSkillChip('Full Time'),
-                Gap(15),
-                _buildSkillChip('Remote'),
-              ],
-            ),
-            Gap(20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  _openPdfViewer(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff80D050),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 12,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                child: Text(
-                  'Generate CV',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xffFFFFFF),
-                  ),
-                ),
-              ),
-            ),
-
           ],
         ),
       ),
@@ -363,41 +252,6 @@ class SavedProfile extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-// PDF Viewer Page
-class PdfViewerPage extends StatelessWidget {
-  const PdfViewerPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          'Generated CV',
-          style: GoogleFonts.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: SfPdfViewer.network(
-        'https://pdfobject.com/pdf/sample.pdf',
-      ),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:crm_app/presentation/Views/Clients/BottomBarFiles/Job/job_screen.dart';
 import 'package:crm_app/presentation/Views/Clients/Workers/client_workers_screen.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/Profile/saved_profile.dart';
-import 'package:crm_app/presentation/Views/Lead/lead_home.dart';
+import 'package:crm_app/presentation/Views/Lead/Bottom_Bar%20Screens/lead_home.dart';
+import 'package:crm_app/presentation/Views/Lead/Bottom_Bar%20Screens/payment/payment_screen.dart';
+import 'package:crm_app/presentation/Views/Lead/employer_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,13 +21,8 @@ class _LeadBottomBarState extends State<LeadBottomBar> {
     LeadHomeScreen(),
     ClientJobScreen(),
     ClientWorkersScreen(),
-    Center(
-      child: Text(
-        "Payment Screen",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    ),
-    SavedProfile(fromBottomBar: true),
+    PaymentScreen(),
+    EmployerProfileScreen()
   ];
 
   @override

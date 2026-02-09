@@ -5,7 +5,7 @@ import 'package:crm_app/presentation/Views/Clients/Add%20post/Upload%20post/uplo
 import 'package:crm_app/presentation/Views/Clients/TimeSheet/client_timesheet.dart';
 import 'package:crm_app/presentation/Views/Clients/clients_bottom_bar.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/splash_screen/splash_screen.dart';
-import 'package:crm_app/presentation/Views/Lead/lead_home.dart';
+import 'package:crm_app/presentation/Views/Lead/Bottom_Bar%20Screens/lead_home.dart';
 import 'package:crm_app/presentation/Views/Worker/Bottom_bar_screens/Earning/dispute_center/dispute_center.dart';
 import 'package:crm_app/presentation/Views/Worker/Bottom_bar_screens/Home/Break_mangement/break_management.dart';
 import 'package:crm_app/presentation/Views/Worker/Bottom_bar_screens/Home/clock%20in-out/clock_in.dart';

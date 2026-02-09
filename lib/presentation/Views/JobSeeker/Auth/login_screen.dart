@@ -41,35 +41,32 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Column(
           children: [
-        Padding(
-        padding: const EdgeInsets.only(top: 20, bottom: 10),
-        child: Row(
-          children: [
             Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(CupertinoIcons.arrow_left),
+              padding: const EdgeInsets.only(top: 20, bottom: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(CupertinoIcons.arrow_left),
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: CommonImageView(
+                        imagePath: 'assets/images/logo2.png',
+                        height: 65,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 48),
+                ],
               ),
             ),
 
-            Expanded(
-              child: Center(
-                child: CommonImageView(
-                  imagePath: 'assets/images/logo2.png',
-                  height: 65,
-                ),
-              ),
-            ),
-
-            const SizedBox(width: 48), // balance space equal to IconButton width
-          ],
-        ),
-      ),
-
-            // Scrollable content
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -120,60 +117,65 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Gap(screenHeight * 0.01),
 
-
-                TextField(
-                controller: passwordController,
-                obscureText: isObscured,
-                obscuringCharacter: "●",
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  hintText: "*******",
-                  hintStyle: TextStyle(
-                    color: Color(0xffB8BABF),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Poppins',
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Colors.black, width: 0.6),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Colors.black, width: 0.6),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Colors.black, width: 0.6),
-                  ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isObscured = !isObscured;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Icon(
-                        isObscured ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_solid,
-                        color: Color(0xff9F9F9F),
-                        size: 20,
+                    TextField(
+                      controller: passwordController,
+                      obscureText: isObscured,
+                      obscuringCharacter: "●",
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "*******",
+                        hintStyle: TextStyle(
+                          color: Color(0xffB8BABF),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Poppins',
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 18),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide:
+                          BorderSide(color: Colors.black, width: 0.6),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide:
+                          BorderSide(color: Colors.black, width: 0.6),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide:
+                          BorderSide(color: Colors.black, width: 0.6),
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isObscured = !isObscured;
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Icon(
+                              isObscured
+                                  ? CupertinoIcons.eye_slash_fill
+                                  : CupertinoIcons.eye_solid,
+                              color: Color(0xff9F9F9F),
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Poppins',
                       ),
                     ),
-                  ),
-                ),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                ),
-              ),
 
-              Gap(10),
+                    Gap(10),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
@@ -183,7 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: FrontendConfigs.kPrimaryColor,
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
-                          decorationColor: FrontendConfigs.kPrimaryColor,
+                          decorationColor:
+                          FrontendConfigs.kPrimaryColor,
                           decorationThickness: 1,
                         ),
                       ),
@@ -216,123 +219,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 0.4,
-                            color: Color(0xff9F9F9F),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: MyText(
-                            text: "Or",
-                            color: FrontendConfigs.kBlackColor,
-                            fontWeight: FontWeight.w500,
-                            size: 14,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 0.4,
-                            color: Color(0xff9F9F9F),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Gap(screenHeight * 0.02),
-                    MyContainer(
-                      onTap: () {},
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(bottom: 10),
-                      height: screenHeight * 0.07,
-                      width: screenWidth * 0.9,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color(0xff3A3A3A),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.transparent,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/google_icon.png",
-                            width: 24,
-                          ),
-                          Gap(10),
-                          Text(
-                            "Continue with google",
-                            style: GoogleFonts.workSans(
-                              fontSize: 16,
-                              color: FrontendConfigs.kBlackColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MyContainer(
-                      onTap: () {},
-                      alignment: Alignment.center,
-                      height: screenHeight * 0.07,
-                      width: screenWidth * 0.9,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color(0xff3A3A3A),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.transparent,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/facebook_icon.png",
-                            width: 24,
-                          ),
-                          Gap(10),
-                          Text(
-                            "Continue with facebook",
-                            style: GoogleFonts.workSans(
-                              fontSize: 16,
-                              color: FrontendConfigs.kBlackColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Gap(screenHeight * 0.05),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SelectRole(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Create an account',
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: FrontendConfigs.kPrimaryColor,
-                            fontWeight: FontWeight.w500,
-                            decoration: TextDecoration.underline,
-                            decorationColor: FrontendConfigs.kPrimaryColor,
-                            decorationThickness: 1,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Gap(screenHeight * 0.02),
                   ],
+                ),
+              ),
+            ),
+
+            // 👇 Pushed to bottom
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SelectRole(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Create an account',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: FrontendConfigs.kPrimaryColor,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.underline,
+                    decorationColor: FrontendConfigs.kPrimaryColor,
+                    decorationThickness: 1,
+                  ),
                 ),
               ),
             ),

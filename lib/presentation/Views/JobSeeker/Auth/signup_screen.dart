@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:crm_app/configurations/frontend_configs.dart';
+import 'package:crm_app/presentation/Views/JobSeeker/Auth/employer_profile_picture.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/login_screen.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Auth/profile_picture.dart';
 import 'package:crm_app/presentation/elements/common_image_view.dart';
@@ -352,13 +353,23 @@ class _SignupScreenState extends State<SignupScreen> {
                       Gap(screenHeight * 0.03),
                       MyContainer(
                         onTap: () {
-                          // Pass the role to ProfilePicture
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProfilePicture(selectedRole: widget.selectedRole),
-                            ),
-                          );
+                          if (widget.selectedRole == "Employer") {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    EmployerProfilePicture(selectedRole: widget.selectedRole),
+                              ),
+                            );
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProfilePicture(selectedRole: widget.selectedRole),
+                              ),
+                            );
+                          }
                         },
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(bottom: 15),

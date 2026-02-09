@@ -20,6 +20,7 @@ class _InterviewDetailPopupState extends State<InterviewDetailPopup> {
   final TextEditingController timeController = TextEditingController(text: '9:00AM');
   final TextEditingController dateController = TextEditingController(text: '12/2/2025');
   final TextEditingController locationController = TextEditingController(text: '11 miles away, GA 30326, Atlanta');
+  final TextEditingController googleMeetController = TextEditingController();
   final TextEditingController noteController = TextEditingController(
     text: 'We are excited to have you onboard. This role is offers for leadership growth and cross-department collaboration.',
   );
@@ -29,6 +30,7 @@ class _InterviewDetailPopupState extends State<InterviewDetailPopup> {
     timeController.dispose();
     dateController.dispose();
     locationController.dispose();
+    googleMeetController.dispose();
     noteController.dispose();
     super.dispose();
   }
@@ -230,6 +232,45 @@ class _InterviewDetailPopupState extends State<InterviewDetailPopup> {
                     ),
                     child: TextField(
                       controller: locationController,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff6B6B6B),
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Gap(16),
+
+              // Google Meet
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Google Meet',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xff6B6B6B),
+                    ),
+                  ),
+                  Gap(8),
+                  Container(
+                    height: 50,
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Color(0xff959595), width: 0.6),
+                    ),
+                    child: TextField(
+                      controller: googleMeetController,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

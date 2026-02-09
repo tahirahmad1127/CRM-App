@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:crm_app/configurations/frontend_configs.dart';
 import 'package:crm_app/presentation/Views/JobSeeker/Bottom_Bar/bottom_bar_screen.dart';
 import 'package:crm_app/presentation/Views/Lead/lead_bottom_bar.dart';
-import 'package:crm_app/presentation/Views/Lead/lead_home.dart';
+import 'package:crm_app/presentation/Views/Lead/Bottom_Bar%20Screens/lead_home.dart';
 import 'package:crm_app/presentation/elements/common_image_view.dart';
 import 'package:crm_app/presentation/elements/my_button.dart';
 import 'package:crm_app/presentation/elements/my_container_widget.dart';

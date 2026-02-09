@@ -1,4 +1,5 @@
-import 'package:crm_app/presentation/Views/Lead/lead_home.dart';
+import 'package:crm_app/presentation/Views/Lead/lead_bottom_bar.dart';
+import 'package:crm_app/presentation/Views/Lead/Bottom_Bar%20Screens/lead_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
@@ -243,7 +244,7 @@ class _UploadPost3ScreenState extends State<UploadPost3Screen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                LeadHomeScreen(),
+                                                LeadBottomBar(),
                                           ),
                                         );
                                       },
